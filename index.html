@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Feedback</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="includes/jquery.mobile-1.4.2.min.css" />
+	<script src="includes/jquery-2.1.0.min.js"></script>
+	<script src="includes/jquery.mobile-1.4.2.min.js"></script>
+	<link rel="stylesheet" href="includes/my_css.css" />
+	<style>
+	    .Main {
+	        font-family: HP Simplified W01 Bold;
+	    }
+	    .ui-content {
+			font-family:  HP Simplified W01 Bold;
+		}
+		.ui-page { 
+			background:#FFFFF;
+		}
+		.ui-page .ui-header {
+			background: #0096D6;
+			text-shadow:none;
+			border:1px solid #0096D6;
+			font-family:  HP Simplified W01 Bold;
+			font-size : 17px;
+			color : #ffffff;
+		}
+	</style>
+	<script>
+		//window.location='./home.html';
+
+        function onSuccess(data, status)
+        {
+            data = $.trim(data);
+            $("#notification").text(data);
+			alert('Thankyou for submitting your valuable feedback');
+			location.reload();
+        }
+  
+        function onError(data, status)
+        {
+			alert('Incomplete: Please complete the form and click submit');
+            // handle an error
+        }        
+  
+        $(document).ready(function() {
+            $("#submit").click(function(){
+                var formData = $("#callAjaxForm").serialize();
+				//alert('Post');
+  
+                $.ajax({
+                    type: "POST",
+                    url: "http://ebiz.pmgasia.com/iweb/HP_FeedbackForm/callajax.php",
+                    cache: false,
+                    data: formData,
+                    success: onSuccess,
+                    error: onError
+                });
+  
+                return false;
+            });
+        });
+	</script>
+</head>
+<body>
+	<div data-role="page" class="main" id="callAjaxPage">
+		<div data-role="header">
+			<h1> Feedback App</h1>
+		</div>
+		<div role="main" class="ui-content">
+		<form id="callAjaxForm" action="callajax.php" method="post">
+			<div class="ui-grid-a">
+				<div class="ui-block-a">
+					<!-- <img src="_/images/_logo(2x2).png">  -->
+				</div>
+				<div class="ui-block-b">
+					<p>Cybercrime -  Security and Software<br/>Event feedback form</p>
+				</div>
+			</div>		
+			<input type="text" name="First_Name" id="First_Name" placeholder="First Name" data-dependency="Last_Name">
+			<input type="text" name="Last_Name" id="Last_Name" placeholder="Last Name" data-dependency="Email">
+			<input type="text" name="Email" id="Email" placeholder="Email">
+			<input type="text" data-clear-btn="true" name="Phone" id="Phone" placeholder="Phone">
+			<input type="text" data-clear-btn="true" name="Company" id="Company" placeholder="Company">
+			<input type="text" data-clear-btn="true" name="Designation" id="Designation" placeholder="Designation">
+			<input type="text" data-clear-btn="true" name="staffserved" id="staff"  placeholder=" staff that served you">
+		<br/>
+			<fieldset data-role="controlgroup">
+				<legend>2. Is your company currently using any of the following information security related products or solutions?</legend>
+				<input type="checkbox" name="Question2[]" id="Question2a" value="Log Management">
+				<label for="Question2a">Log Management</label>
+				<input type="checkbox" name="Question2[]" id="Question2b" value="Application Security">
+				<label for="Question2b">Application Security</label>
+				<input type="checkbox" name="Question2[]" id="Question2c" value="Intrusion Detection System">
+				<label for="Question2c">Intrusion Detection System</label>
+				<input type="checkbox" name="Question2[]" id="Question2d" value="Firewall">
+				<label for="Question2d">Firewall</label>
+				<input type="checkbox" name="Question2[]" id="Question2e" value="Identity Monitoring Application">
+				<label for="Question2e">Identity Monitoring Application</label>
+				<input type="checkbox" name="Question2[]" id="Question2f" value="Compliance Toolkit">
+				<label for="Question2f">Compliance Toolkit</label>
+				<input type="checkbox" name="Question2[]" id="Question2g" value="Security Information/Event Management Solution">
+				<label for="Question2g">Security Information/Event Management Solution</label>
+				<input type="checkbox" name="Question2[]" id="Question2h" value="Others(Please Specify)">
+				<label for="Question2h">Others(Please Specify)</label>
+			</fieldset>
+		<br/>
+			<fieldset data-role="controlgroup">
+				<legend>3. Is your organization looking at the below initiatives in the next 6 months?</legend>
+				<input type="checkbox" name="Question3[]" id="Question3a" value="Securing Virtualized Deployment">
+				<label for="Question3a">Securing Virtualized Deployment</label>
+				<input type="checkbox" name="Question3[]" id="Question3b" value="Securing customized or 3rd party web apllications">
+				<label for="Question3b">Securing customized or 3rd party web apllications</label>
+				<input type="checkbox" name="Question3[]" id="Question3c" value="Protection your network from known malicious IP">
+				<label for="Question3c">Protection your network from known malicious IP</label>
+				<input type="checkbox" name="Question3[]" id="Question3d" value="Implementing replacing IPS for new existing segments in your network">
+				<label for="Question3d">Implementing/ replacing IPS for new/existing segments in your network</label>
+			</fieldset>
+		<br/>
+			<div class="ui-grid-a">
+				<div class="ui-block-a">
+					4. My role in the evaluation and decision-making process is:
+				</div>
+				<div class="ui-block-b">
+					<fieldset class="ui-field-contain">
+						<select name="Question4" id="Question4">
+							<option hidden="false">Please select</option>
+							<option value="Evaluation/Recommender">Evaluation/Recommender</option>
+							<option value="Decision-maker">Decision-maker</option>
+							<option value="Influencer">Influencer</option>
+							<option value="Part of a Committee or Team">Part of a Committee or Team</option>
+							<option value="No Role">No Role</option>
+							<option value="Others">Others</option>
+						</select>
+					</fieldset>
+				</div>
+			</div>	
+		<br/>
+			<div class="ui-grid-a">
+				<div class="ui-block-a">
+					 5. Do you currently have a budget for a solution purchase?
+				</div>
+			<div class="ui-block-b">
+				<fieldset class="ui-field-contain">
+					<select name="Question5" id="Question5">
+						<option hidden="false">Please select</option>
+						<option value="Yes">Yes</option>
+						<option value="No">No</option>
+					</select>
+				</fieldset>
+				</div>
+			</div>		
+		<br/>
+			<div class="ui-grid-a">
+				<div class="ui-block-a">
+					6. How much do you or your organization anticipate spending in the next 12 months?
+				</div>
+				<div class="ui-block-b">
+					<fieldset class="ui-field-contain">
+						<select name="Question6" id="Question6">
+							<option hidden="false">Please select</option>
+							<option value="Less than USD25,000">Less than USD25,000</option>
+							<option value="USD25,000 to USD99,999">USD25,000 to USD99,999</option>
+							<option value="USD100,000 to USD499,999">USD100,000 to USD499,999</option>
+							<option value="USD500,000 to USD999,999">USD500,000 to USD999,999</option>
+							<option value="USD1 million or more">USD1 million or more</option>
+							<option value="Don't know">Don't know</option>
+						</select>
+					</fieldset>
+				</div>
+			</div>
+		<br/>
+			<div class="ui-grid-a">
+				<div class="ui-block-a">
+					7. What is your time frame for this purchase?
+				</div>
+				<div class="ui-block-b">
+				<fieldset class="ui-field-contain">
+					<select name="Question7" id="Question7">
+						<option hidden="false">Please select</option>
+						<option value="Less than 1 month">Less than 1 month</option>
+						<option value="1 to 3 months">1 to 3 months</option>
+						<option value="3 to 6 months">3 to 6 months</option>
+						<option value="More than 6 months">More than 6 months</option> 
+					</select>
+				</fieldset>
+				</div>
+			</div>			 
+		<br/>
+			<fieldset data-role="controlgroup">
+				<legend>8. Are you interested to learn more about tackling the issues of:</legend>
+				<input type="checkbox" name="Question8[]" id="Question8a" value="Insider threats">
+				<label for="Question8a">Insider threats</label>
+				<input type="checkbox" name="Question8[]" id="Question8b" value="Mitigating External Attacks on our web-based">
+				<label for="Question8b">Mitigating External Attacks on our web-based</label>
+				<input type="checkbox" name="Question8[]" id="Question8c" value="Assuring continuity of critical business systems">
+				<label for="Question8c">Assuring continuity of critical business systems</label>
+				<input type="checkbox" name="Question8[]" id="Question8d" value="Managing different brands of security and networking devices">
+				<label for="Question8d">Managing different brands of security and networking devices</label>
+				<input type="checkbox" name="Question8[]" id="Question8e" value="Regulatory Compliances requirement for IT Governances e.g. PCI, Sarbanes-Oxley,HIPAA,Base II">
+				<label for="Question8e">Regulatory Compliances requirement for IT Governances e.g. PCI, Sarbanes-Oxley,HIPAA,Base II</label>
+			</fieldset>
+		<br/>
+			<fieldset data-role="controlgroup">
+				<legend>9. What are you doing today around application security vulnerability testing?</legend>
+				<input type="checkbox" name="Question9[]" id="Question9a" value="Manual Pen Testing">
+				<label for="Question9a">Manual Pen Testing</label>
+				<input type="checkbox" name="Question9[]" id="Question9b" value="Manual Source Code Review">
+				<label for="Question9b">Manual Source Code Review</label>
+				<input type="checkbox" name="Question9[]" id="Question9c" value="Automated Source Code Review">
+				<label for="Question9c">Automated Source Code Review</label>
+				<input type="checkbox" name="Question9[]" id="Question9d" value="Phone">
+				<label for="Question9d">3rd Party Pen Testing Services</label>
+			</fieldset>
+		<br/>
+			<label for="textarea-1">10. Other comments:</label>
+			<textarea name="Question10" id="Question10"></textarea>
+		<br/>
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>11. Occasionally,  communicates information about products, events, services and/or support. May  contact you with information that may be relevant to you?</legend>
+				<input type="checkbox" name="Question11[]" id="Question11a" value="Email">
+				<label for="Question11a">Email</label>
+				<input type="checkbox" name="Question11[]" id="Question11b" value="Phone">
+				<label for="Question11b">Phone</label>
+			</fieldset>
+		<br/>
+			<p>
+				Subscribe to the Discover Performance community!<br/><br/>  
+
+				Be part of this community now to enjoy the following<br/>benefits:
+				- Bi-monthly Discover Performance<br/>newsletter
+				- Exclusive access to research and actionable insight from peers, analysts and thought leaders
+				- Exclusive invitations to local events and webcasts
+			</p>
+			<input type="checkbox" name="Agree" id="Agree" data-wrapper-class="ui-mini" value="1">
+			<label for="Agree">Yes, I am interested to be part of the Discover Performance  community</label>
+		<br/>
+			<div class="ui-grid-b">
+			    <div class="ui-block-a"></div>
+			    <div class="ui-block-b"></div>
+			    <div class="ui-block-c">
+					<button type="submit"  style="color:#FFF; background-color:#0096D6" name="submit" value="submit" data-theme="a" id="submit">Submit</button>
+			    </div>
+			</div>
+			<h3 id="notification"></h3>
+		</form>
+		</div>
+
+		<!--<div data-role="footer">
+			<h4>Page Footer</h4>
+		</div>-->
+	</div>
+</body>
+</html>
